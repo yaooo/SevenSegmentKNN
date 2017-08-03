@@ -17,7 +17,7 @@ adjustment = ProcessingVariables.adjustment
 iterations = ProcessingVariables.iterations
 blur = ProcessingVariables.blur
 
-version = '_1_0'
+version = '_1_1'
 test_folder = 'C:\Users\Yao\Desktop\capture\p'
 
 frameProcessor = FrameProcessor(std_height, version, False, write_digits=False)
@@ -26,6 +26,9 @@ frameProcessor = FrameProcessor(std_height, version, False, write_digits=False)
 def test_img(path, expected, show_result=True):
     frameProcessor.set_image(path)
     (debug_images, calculated) = frameProcessor.process_image(blur, threshold, adjustment, erode, iterations)
+    if int(calculated) < 40:
+        (debug_images, calculated) = frameProcessor.process_image(blur, threshold, adjustment, erode + 1, iterations)
+
 
     if expected == calculated:
         if show_result:
@@ -39,7 +42,7 @@ def test_img(path, expected, show_result=True):
 
 def get_expected_from_filename(filename):
     expected = filename.split('.')[0]
-    expected = expected.replace('A', '.')
+    # expected = expected.replace('A', '.')
     expected = expected.replace('Z', '')
     return expected
 

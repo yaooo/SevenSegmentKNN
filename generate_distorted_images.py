@@ -21,12 +21,15 @@ def dilate_img(img, file_name, file_folder, show, write):
 
 
 def erode_img(img, file_name, file_folder, show, write):
+    kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
     for iterations in range(1, 3):
         for erode in range(1, 4, 2):
             kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (erode, erode))
             eroded = cv2.erode(img, kernel, iterations=iterations)
+            closed = cv2.morphologyEx(eroded, cv2.MORPH_CLOSE, kernel1)
+
             for rot in range(-2, 3, 2):
-                dst = rotate_image(eroded, rot)
+                dst = rotate_image(closed, rot)
                 title = 'eroded-r-' + str(rot) + '-e-' + str(erode) + '-i-' + str(iterations)
                 if show:
                     show_img(title, dst)
@@ -43,8 +46,8 @@ def process_image(path, show=True, write=False):
     file_folder, full_file = os.path.split(path)
     file_name = full_file.split('.')[0]
 
-    # erode_img(img, file_name, file_folder, show, write)
-    dilate_img(img, file_name, file_folder, show, write)
+    erode_img(img, file_name, file_folder, show, write)
+    # dilate_img(img, file_name, file_folder, show, write)
 
 
 def show_distorted(path, show, write):
@@ -60,7 +63,7 @@ def process_directory(folder):
 
 
 def main():
-    img_file = 'training/7/7_1079_crop_3.png'
+    img_file = 'C:/Users/Yao/Desktop/number/1.png'
     show = True
 
     if len(sys.argv) == 2:

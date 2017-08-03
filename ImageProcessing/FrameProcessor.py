@@ -82,8 +82,13 @@ class FrameProcessor:
         inverse = inverse_colors(eroded)
         debug_images.append(('Inversed', inverse))
 
+        # Try out close
+        kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+        closed = cv2.morphologyEx(inverse, cv2.MORPH_CLOSE, kernel1)
+        debug_images.append(('Closed', closed))
+
         # Find the lcd digit contours
-        _, contours, _ = cv2.findContours(inverse, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # get contours
+        _, contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)  # get contours
 
         # Assuming we find some, we'll sort them in order left -> right
         if len(contours) > 0:
@@ -191,22 +196,10 @@ class FrameProcessor:
                 if self.debug:
                     cv2.rectangle(self.img, (x, y), (x + w, y + h), (66, 146, 244), 2)
 
-        decimal_x = 0
-        # Loop over the potential digits and find a square that's between the left/right digit x positions on the
-        # lower half of the screen
-        for pot_decimal in potential_decimals:
-            [x, y, w, h] = cv2.boundingRect(pot_decimal)
-
-            if x < right_most_digit and x > left_most_digit and y > (self.height / 2):
-                cv2.rectangle(self.img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-                decimal_x = x
-
-        # Once we know the position of the decimal, we'll insert it into our string
-        for ix, digit_x in enumerate(digit_x_positions):
-            if digit_x > decimal_x:
-                # insert
-                output = output[:ix] + '.' + output[ix:]
-                break
+        if len(output) == 2 and int(output) < 40:
+            output = '1' + output
+        if int(output) > 800 and int(output[0]) == 8:
+            output = '1' + output[1:]
 
         # Debugging to show the left/right digit x positions
         if self.debug:
@@ -233,6 +226,5 @@ class FrameProcessor:
         npaROIResized = np.float32(npaROIResized)
         _, results, neigh_resp, dists = self.knn.findNearest(npaROIResized, k=1)
         predicted_digit = str(chr(int(results[0][0])))
-        if predicted_digit == 'A':
-            predicted_digit = '.'
+
         return predicted_digit

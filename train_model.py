@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 
 # Current version of training
-version = '_1_0'
+version = '_1_1'
 
 RESIZED_IMAGE_WIDTH = 20
 RESIZED_IMAGE_HEIGHT = 30
@@ -51,7 +51,7 @@ def serialize_dict(dict):
 # Write out the image mat data, to the format OpenCV expects
 def serialize_mat(mat):
     type_id = 'opencv-matrix'
-    dt = 'f'  # TODO: Be smarter about the data type
+    dt = 'f'
     return '{{"type_id":"{}", "dt":"{}", "data":{}, "rows":{}, "cols": {}}}\n' \
         .format(type_id, dt, serialize_array(mat), mat.shape[0], mat.shape[1])
 

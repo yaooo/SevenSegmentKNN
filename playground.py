@@ -6,10 +6,10 @@ from ImageProcessing import FrameProcessor, ProcessingVariables
 from DisplayUtils.TileDisplay import show_img, reset_tiles
 
 window_name = 'Playground'
-#file_name = 'tests/single_line/4A152.jpg'
-file_name = 'capture/50.png'
+# file_name = 'tests/single_line/4A152.jpg'
+file_name = 'C:\Users\Yao\Desktop\capture\p/111Z.PNG'
 #file_name = 'tests/multi_line_not_cropped/47A60_17A252.jpg'
-version = '_1_0'
+version = '_1_1'
 
 erode = ProcessingVariables.erode
 threshold = ProcessingVariables.threshold
@@ -36,6 +36,9 @@ def process_image():
     reset_tiles()
     start_time = time.time()
     debug_images, output = frameProcessor.process_image(blur, threshold, adjustment, erode, iterations)
+    if int(output) < 40:
+        debug_images, output = frameProcessor.process_image(blur, threshold, adjustment, erode+1, iterations)
+
 
     for image in debug_images:
         show_img(image[0], image[1])
