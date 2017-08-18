@@ -25,10 +25,14 @@ frameProcessor = FrameProcessor(std_height, version, False, write_digits=False)
 
 def test_img(path, expected, show_result=True):
     frameProcessor.set_image(path)
-    (debug_images, calculated) = frameProcessor.process_image(blur, threshold, adjustment, erode, iterations)
-    if int(calculated) < 40:
+    (debug_images1, calculated1) = frameProcessor.process_image(blur, threshold, adjustment, erode, iterations)
+    if not calculated1:
         (debug_images, calculated) = frameProcessor.process_image(blur, threshold, adjustment, erode + 1, iterations)
-
+    elif int(calculated1) < 40:
+        (debug_images, calculated) = frameProcessor.process_image(blur, threshold, adjustment, erode + 1, iterations)
+    else:
+        debug_images = debug_images1
+        calculated = calculated1
 
     if expected == calculated:
         if show_result:

@@ -103,7 +103,7 @@ class FrameProcessor:
         # Aspect ratio for all non 1 character digits
         desired_aspect = 0.6
         # Aspect ratio for the "1" digit
-        digit_one_aspect = 0.3
+        digit_one_aspect = 0.25
         # The allowed buffer in the aspect when determining digits
         aspect_buffer = 0.15
 
@@ -198,7 +198,7 @@ class FrameProcessor:
 
         if len(output) == 2 and int(output) < 40:
             output = '1' + output
-        if int(output) > 800 and int(output[0]) == 8:
+        if len(output) > 2 and int(output) > 800 and int(output[0]) == 8:
             output = '1' + output[1:]
 
         # Debugging to show the left/right digit x positions

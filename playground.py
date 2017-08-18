@@ -7,8 +7,10 @@ from DisplayUtils.TileDisplay import show_img, reset_tiles
 
 window_name = 'Playground'
 # file_name = 'tests/single_line/4A152.jpg'
-file_name = 'C:\Users\Yao\Desktop\capture\p/111Z.PNG'
+# file_name = 'C:/Users/Yao/Desktop/cropped/finished/unfinished/1 (1).jpg'
 #file_name = 'tests/multi_line_not_cropped/47A60_17A252.jpg'
+file_name = 'C:/Users/Yao/Desktop/capture/p/101Z.png'
+
 version = '_1_1'
 
 erode = ProcessingVariables.erode
@@ -50,10 +52,8 @@ def process_image():
 
 
 def setup_ui():
-    cv2.namedWindow(window_name)
+    cv2.namedWindow(window_name, cv2.WINDOW_AUTOSIZE)
     width = 1000
-    height = int(width * 1.5)
-    cv2.resizeWindow(window_name, width, height)
     cv2.createTrackbar('Threshold', window_name, int(threshold), 500, change_threshold)
     cv2.createTrackbar('Iterations', window_name, int(iterations), 5, change_iterations)
     cv2.createTrackbar('Adjust', window_name, int(adjustment), 200, change_adj)
