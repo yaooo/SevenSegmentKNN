@@ -4,6 +4,7 @@ import sys
 
 from ImageProcessing import FrameProcessor, ProcessingVariables
 from DisplayUtils.TileDisplay import show_img, reset_tiles
+import version_number as v
 
 window_name = 'Playground'
 # file_name = 'tests/single_line/4A152.jpg'
@@ -11,7 +12,9 @@ window_name = 'Playground'
 #file_name = 'tests/multi_line_not_cropped/47A60_17A252.jpg'
 file_name = 'C:/Users/Yao/Desktop/capture/p/101Z.png'
 
-version = '_1_1'
+
+# Current version of training
+version = v.vm.version
 
 erode = ProcessingVariables.erode
 threshold = ProcessingVariables.threshold

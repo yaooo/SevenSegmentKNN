@@ -3,9 +3,10 @@
 import os
 import cv2
 import numpy as np
+import version_number as v
 
 # Current version of training
-version = '_1_1'
+version = v.vm.version
 
 RESIZED_IMAGE_WIDTH = 20
 RESIZED_IMAGE_HEIGHT = 30
@@ -15,7 +16,7 @@ npa_flattened_images = np.empty((0, RESIZED_IMAGE_WIDTH * RESIZED_IMAGE_HEIGHT))
 npa_classifications = []
 
 trained_folder = 'knn1'
-trained_json_path = 'training1' + version + '.json'
+trained_json_path = 'training' + version + '.json'
 
 
 # Classify a digit
@@ -68,12 +69,12 @@ def serialize_array(arr):
 
 
 def main():
-    training_dir = "training1"
+    training_dir = "training"
 
     for fname in os.listdir(training_dir):
         path = os.path.join(training_dir, fname)
         if os.path.isdir(path):
-            print 'Training1 ' + fname
+            print 'Training ' + fname
             tfiles = os.listdir(path)
             for tfile in tfiles:
                 if not tfile.startswith('.'):

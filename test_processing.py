@@ -3,7 +3,9 @@ import time
 
 from DisplayUtils.Colors import bcolors
 from ImageProcessing import FrameProcessor, ProcessingVariables
+import version_number as v
 
+version = v.vm.version
 std_height = 90
 
 # thresh = 73  # 1-50 mod 2 25
@@ -17,7 +19,6 @@ adjustment = ProcessingVariables.adjustment
 iterations = ProcessingVariables.iterations
 blur = ProcessingVariables.blur
 
-version = '_1_1'
 test_folder = 'C:\Users\Yao\Desktop\capture\p'
 
 frameProcessor = FrameProcessor(std_height, version, False, write_digits=False)
