@@ -15,7 +15,7 @@ int_classifications = []
 npa_flattened_images = np.empty((0, RESIZED_IMAGE_WIDTH * RESIZED_IMAGE_HEIGHT))
 npa_classifications = []
 
-trained_folder = 'knn1'
+trained_folder = 'knn'
 trained_json_path = 'training' + version + '.json'
 
 

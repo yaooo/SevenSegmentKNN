@@ -34,9 +34,9 @@ class FrameProcessor:
         return img, dim[0]
 
     def train_knn(self, version):
-        npa_classifications = np.loadtxt("knn1/classifications" + version + ".txt",
+        npa_classifications = np.loadtxt("knn/classifications" + version + ".txt",
                                          np.float32)  # read in training classifications
-        npa_flattened_images = np.loadtxt("knn1/flattened_images" + version + ".txt",
+        npa_flattened_images = np.loadtxt("knn/flattened_images" + version + ".txt",
                                           np.float32)  # read in training images
 
         npa_classifications = npa_classifications.reshape((npa_classifications.size, 1))

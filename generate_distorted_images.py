@@ -63,7 +63,7 @@ def process_directory(folder):
 
 
 def main():
-    img_file = 'C:/Users/Yao/Desktop/number/1.png'
+    img_file = 'C:/Users/Yao/Desktop/images/1.jpg'
     show = True
 
     if len(sys.argv) == 2:
