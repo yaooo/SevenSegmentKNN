@@ -1,9 +1,7 @@
 Credit to kazmiekr, https://github.com/kazmiekr
 I got this code from him, and tried to modify his code for other types of seven-segment images.
 
-# Gas Pump OCR
-
-Project for attempting to scan pictures of gas pumps and detect the digits in the cost and fuel amount displays. Operating under the assumption that most pumps use a 7 segment digit display.
+# seven-segment OCR
 
 ## Dependencies
 
